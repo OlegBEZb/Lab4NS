@@ -60,14 +60,15 @@ $ns duplex-link-op $r4 $k3 orient down
 
 $ns queue-limit $r1 $r2 15
 $ns duplex-link-op $r1 $r2 queuePos 0.5
+
 #Задаём мониторинг очереди
 $ns trace-queue $r1 $r2 $fout
 
-#Создаём объекти типа QueueMonitor
+#Создаём объект типа QueueMonitor
 set qm0 [ $ns monitor-queue $r1 $r2 [ $ns get-ns-traceall] ]
 
 #Процедура обработки выодных данных
-proc finish {label mod} {
+proc finish { label mod} {
 #Создаём и подготавливаем выходной файл данных
     exec rm -f temp.rands
     set f [open temp.rands w]
@@ -83,7 +84,7 @@ proc finish {label mod} {
                            print $2,$8*(mod+10) + ($11 % mod)
           }
     } mod=$mod out.tr > temp.p
-#Заносим данные об отброшенных пакетах очереди во временный файл temp.p
+#Заносим данные об отброшенных пакетах очереди во временный файл temp.d
     exec rm -f temp.d
     exec touch temp.d
     exec awk {
