@@ -94,12 +94,12 @@ proc finish { label mod} {
           }
     } mod=$mod out.tr > temp.d
 #Заносим даные из временных файлов temp.p и temp.d в выходной файл для xgraph temp.rands
-    puts $f\"enque/deque
+    puts $f \"enque/deque
     flush $f
     exec cat temp.p >@ $f
     flush $f
 
-    puts $f\n\"drops
+    puts $f \n\"drops
     flush $f
 
     exec head -1 temp.d >@ $f
