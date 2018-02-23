@@ -63,7 +63,9 @@ proc trqueue {} {
     set time 0.1
 #Переменная, определяющая размер очереди в пакетах
     set q0 [$qm0 set pkts_]
+#Переменная, определяющая число поступивших пакетов в очереди между узлами r1 и r2
     set q1 [$qm0 set parrivals_]
+#Переменная, определяющая число отброшенных пакетов в очереди между узлами r1 и r2s
     set q2 [$qm0 set pdrops_]
     set now [$ns now]
     puts $f0 "$now $q0"
@@ -81,7 +83,7 @@ proc finish {} {
     close $f2
     #Runs Xgraph with such parameters: window size, window location and names of input files
     exec xgraph out0.tr out1.tr out2.tr -geometry 800x600+100+100 \
-    -0 source0 -1 arrivals -2 drops &
+    -0 queue -1 arrivals -2 drops &
     exit 0
 }
 

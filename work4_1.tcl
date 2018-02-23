@@ -52,14 +52,15 @@ $ns duplex-link-op $r4 $k3 orient down
 $ns queue-limit $r1 $r2 30
 $ns duplex-link-op $r1 $r2 queuePos 0.5
 
-#Создаём объекти типа QueueMonitor
+#Создаём объект типа QueueMonitor
 set qm0 [ $ns monitor-queue $r1 $r2 [ $ns get-ns-traceall] ]
 
+#Процедура мониторинга очереди с помощью объекта qm0
 proc trqueue {} {
     global qm0 f0
     set ns [Simulator instance]
     set time 0.1
-#Переменная, определяющая размер очереди в пакетах
+#Переменная состояния, определяющая размер очереди в пакетах
     set q1 [$qm0 set pkts_]
     set now [$ns now]
     puts $f0 "$now $q1"
@@ -71,7 +72,7 @@ proc trqueue {} {
 proc finish {} {
     global f0
     close $f0
-    #Runs Xgraph with such parameters: window size and names of input files
+    #Runs Xgraph with such parameters: window size,window position and names of input files
     exec xgraph out0.tr -geometry 800x600+100+100 \
     -0 source0 &
     exit 0
@@ -92,9 +93,6 @@ proc attach-expoo-traffic {node sink size burst idle rate } {
     return $source
 }
 
-
-
-#Receiver with monitor of missed packets
 set sink0 [new Agent/Null]
 set sink1 [new Agent/Null]
 
