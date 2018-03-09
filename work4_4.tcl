@@ -6,6 +6,7 @@ set mod 50
 
 $ns color 0 Blue
 $ns color 1 Red
+$ns color 2 Green
 
 #Подготавливаем выходной файл симулятора out.tr
 exec rm -f out.tr
@@ -133,19 +134,25 @@ proc attach-expoo-traffic {node sink size burst idle rate } {
 #Receiver with monitor of missed packets
 set sink0 [new Agent/Null]
 set sink1 [new Agent/Null]
+set sink2 [new Agent/Null]
 
 $ns attach-agent $k1 $sink0
 $ns attach-agent $k2 $sink1
+$ns attach-agent $k3 $sink2
 
 set source0 [attach-expoo-traffic $s1 $sink0 500 0.1s 0.1s 150k]
 $source0 set fid_ 0
 set source1 [attach-expoo-traffic $s2 $sink1 500 0.1s 0.1s 250k]
 $source1 set fid_ 1
+set source2 [attach-expoo-traffic $s3 $sink2 1000 0.1s 0.1s 100k]
+$source1 set fid_ 2
 
 $ns at 0.1 "$source0 start"
 $ns at 0.1 "$source1 start"
+$ns at 0.1 "$source2 start"
 $ns at 2.5 "$source0 stop"
 $ns at 2.5 "$source1 stop"
+$ns at 2.5 "$source2 stop"
 $ns at 3.0 "ns flush-trace; close $fout;\
             finish $label $mod"
 
