@@ -145,7 +145,7 @@ $source0 set fid_ 0
 set source1 [attach-expoo-traffic $s2 $sink1 500 0.1s 0.1s 250k]
 $source1 set fid_ 1
 set source2 [attach-expoo-traffic $s3 $sink2 1000 0.1s 0.1s 100k]
-$source1 set fid_ 2
+$source2 set fid_ 2
 
 $ns at 0.1 "$source0 start"
 $ns at 0.1 "$source1 start"

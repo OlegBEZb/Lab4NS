@@ -41,7 +41,7 @@ proc attach-expoo-traffic {node sink size burst idle rate } {
     return $source
 }
 
-#Procedure for collecting information. Counts current traffic of every source and writes it down into appropriate output files. These files will be used as input for Xgaph utility.
+#Procedure for collecting information. Counts current traffic of every source and writes it down into appropriate output files. These files will be used as input for Xgraph utility.
 proc record {} {
     global sink0 sink1 sink2 f0 f1 f2
     set ns [Simulator instance]
